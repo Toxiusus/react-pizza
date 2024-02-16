@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 
 import "./scss/app.scss";
+import NotFoundBlock from "./components/NotFoundBlock";
 
 function App() {
   const pathname = window.location.pathname;
@@ -18,6 +19,7 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="/" element={<Home/>} />
+            <Route path="/not-found" element={<NotFound/>} />
           </Routes>
         </div>
       </div>
