@@ -1,5 +1,5 @@
-import React from 'react';
-import ContentLoader from 'react-content-loader';
+import React from "react";
+import ContentLoader from "react-content-loader";
 
 const Skeleton = (props) => (
   <ContentLoader
@@ -10,7 +10,8 @@ const Skeleton = (props) => (
     viewBox="0 0 280 500"
     backgroundColor="#f3f3f3"
     foregroundColor="#ecebeb"
-    {...props}>
+    {...props}
+  >
     <circle cx="135" cy="156" r="125" />
     <rect x="0" y="296" rx="10" ry="10" width="280" height="23" />
     <rect x="0" y="333" rx="10" ry="10" width="280" height="88" />
