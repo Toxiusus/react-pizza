@@ -10,11 +10,10 @@ import "./scss/app.scss";
 import NotFoundBlock from "./components/NotFoundBlock";
 
 function App() {
-  const pathname = window.location.pathname;
-
+  const [searchValue, setSearchValue] = React.useState('');
   return (
     <div className="wrapper">
-      <Header />
+      <Header searchValue={searchValue} setSearchValue={setSearchValue}/>
       <div className="content">
         <Routes>
           <Route path="/" element={<Home />} />
