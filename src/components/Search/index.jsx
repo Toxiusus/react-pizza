@@ -15,7 +15,7 @@ const Search = ({ searchValue, setSearchValue }) => {
         placeholder="Поиск пиццы..."
       />
       {searchValue && (
-        <img className={styles.clearIcon} src={logoClose} alt="close" />
+        <img onClick={() => setSearchValue('')} className={styles.clearIcon} src={logoClose} alt="close" />
       )}
     </div>
   );
