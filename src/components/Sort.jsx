@@ -29,13 +29,13 @@ const Sort = ({ sort, onClickSort }) => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={() => setOpen(!open)}>{list[sort].name}</span>
+        <span onClick={() => setOpen(!open)}>{sort.name}</span>
       </div>
       {open && (
         <div className="sort__popup">
           <ul>
             {list.map((obj, i) => (
-              <li key={i} onClick={() => clickList(obj.sort)} className={sort === i ? 'active' : ''}>
+              <li key={i} onClick={() => clickList(obj)} className={sort.sort === obj.sort ? 'active' : ''}>
                 {obj.name}
               </li>
             ))}

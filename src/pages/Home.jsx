@@ -9,11 +9,11 @@ const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [categoryId, setCategoryId] = React.useState(0);
-  const [sort, setSort] = React.useState(0);
+  const [sort, setSort] = React.useState({ name: 'популярности', sort: 'rating' });
 
   React.useEffect(() => {
     setIsLoading(true);
-    fetch('https://13ff12425e4c1706.mokky.dev/items?category=' + categoryId)
+    fetch(`https://13ff12425e4c1706.mokky.dev/items?${categoryId > 0 ? `category=${categoryId}` : ''}&sortBy=${sort}`)
       .then((res) => {
         return res.json();
       })
