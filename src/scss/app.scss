@@ -15,7 +15,9 @@
   padding: 40px 0;
 
   &__title {
-    margin: 35px 0;
+    font-size: 35px;
+    font-weight: 800;
+    margin: 37px 0;
   }
 
   &__items {
@@ -34,7 +36,7 @@
       .categories{
         margin-bottom: 30px;
         width: 100%;
-        overflow: scroll;
+        overflow: auto;
 
         ul{
           width: 785px;
