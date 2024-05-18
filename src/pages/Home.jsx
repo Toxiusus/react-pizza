@@ -9,10 +9,13 @@ const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [categoryId, setCategoryId] = React.useState(0);
+  const [sortType, setSortType] = React.useState(0);
 
   React.useEffect(() => {
     setIsLoading(true);
-    fetch(`https://13ff12425e4c1706.mokky.dev/items?${categoryId > 0 ? `category=${categoryId}` : ''}`)
+    fetch(
+      `https://13ff12425e4c1706.mokky.dev/items?${categoryId > 0 ? `category=${categoryId}` : ''}`,
+    )
       .then((res) => {
         return res.json();
       })
@@ -27,7 +30,7 @@ const Home = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onClickCategory={(i) => setCategoryId(i)} />
-        <Sort/>
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
