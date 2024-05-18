@@ -9,11 +9,10 @@ const Home = () => {
   const [items, setItems] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [categoryId, setCategoryId] = React.useState(0);
-  const [sort, setSort] = React.useState({ name: 'популярности', sort: 'rating' });
 
   React.useEffect(() => {
     setIsLoading(true);
-    fetch(`https://13ff12425e4c1706.mokky.dev/items?${categoryId > 0 ? `category=${categoryId}` : ''}&sortBy=${sort}`)
+    fetch(`https://13ff12425e4c1706.mokky.dev/items?${categoryId > 0 ? `category=${categoryId}` : ''}`)
       .then((res) => {
         return res.json();
       })
@@ -22,13 +21,13 @@ const Home = () => {
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
-  }, [categoryId, sort]);
+  }, [categoryId]);
 
   return (
     <div className="container">
       <div className="content__top">
-        <Categories categoryId={categoryId} onClickCategory={(i) => setCategoryId(i)} />
-        <Sort sort={sort} onClickSort={(i) => setSort(i)} />
+        <Categories value={categoryId} onClickCategory={(i) => setCategoryId(i)} />
+        <Sort/>
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
