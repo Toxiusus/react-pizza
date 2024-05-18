@@ -30,7 +30,7 @@ const Home = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onClickCategory={(i) => setCategoryId(i)} />
-        <Sort value={sortType} onClickSort={(i) => setSortType(i)}/>
+        <Sort value={sortType} onChangeSort={(i) => setSortType(i)}/>
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
