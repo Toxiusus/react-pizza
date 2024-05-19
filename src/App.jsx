@@ -4,7 +4,6 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import NotFound from './pages/NotFound';
 import { Route, Routes } from 'react-router-dom';
-// import pizzas from './assets/pizza.json'
 
 function App() {
   const [searchValue, setSearchValue] = React.useState('');
