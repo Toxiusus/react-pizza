@@ -14,13 +14,11 @@ const Home = ({ searchValue }) => {
     sortProperty: 'rating',
   });
 
+  const category = categoryId > 0 ? `category=${categoryId}` : '';
+
   React.useEffect(() => {
     setIsLoading(true);
-    fetch(
-      `https://13ff12425e4c1706.mokky.dev/items?${
-        categoryId > 0 ? `category=${categoryId}` : ''
-      }&sortBy=${sortType.sortProperty}`,
-    )
+    fetch(`https://13ff12425e4c1706.mokky.dev/items?${category}&sortBy=${sortType.sortProperty}`)
       .then((res) => {
         return res.json();
       })
@@ -31,7 +29,14 @@ const Home = ({ searchValue }) => {
     window.scrollTo(0, 0);
   }, [categoryId, sortType]);
 
-  const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />);
+  const pizzas = items
+    .filter((obj) => {
+      if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
+        return true;
+      }
+      return false;
+    })
+    .map((obj) => <PizzaBlock key={obj.id} {...obj} />);
 
   const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />);
 
