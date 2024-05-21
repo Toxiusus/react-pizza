@@ -20,7 +20,7 @@ const Home = () => {
 
   React.useEffect(() => {
     setIsLoading(true);
-    fetch(`https://13ff12425e4c1706.mokky.dev/items?${category}&sortBy=${sortType.sortProperty}`)
+    fetch(`https://664ca05b35bbda1098812f41.mockapi.io/items?${category}&sortBy=${sortType.sortProperty}`)
       .then((res) => {
         return res.json();
       })
