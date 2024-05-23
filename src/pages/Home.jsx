@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 
 import { setCategoryId } from '../redux/slices/filterSlice';
 import Categories from '../components/Categories';
@@ -9,13 +10,12 @@ import Skeleton from '../components/PizzaBlock/Skeleton';
 import { SearchContext } from '../App';
 
 const Home = () => {
-  const {categoryId,sort} = useSelector((state) => state.filterSlice);
+  const { categoryId, sort } = useSelector((state) => state.filterSlice);
   const sortType = sort.sortProperty;
   const dispatch = useDispatch();
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
   };
-  
 
   const { searchValue } = React.useContext(SearchContext);
   const [items, setItems] = React.useState([]);
@@ -38,6 +38,13 @@ const Home = () => {
     window.scrollTo(0, 0);
   }, [categoryId, sortType]);
 
+  // axios
+  //   .get(`https://664ca05b35bbda1098812f41.mockapi.io/items?${category}&sortBy=${sortType}`)
+  //   .then((res) => {
+  //     setItems(res.data);
+  //     setIsLoading(false);
+  //   });
+
   const pizzas = items
     .filter((obj) => {
       if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
@@ -53,7 +60,7 @@ const Home = () => {
     <div className="container">
       <div className="content__top">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <Sort/>
+        <Sort />
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">{isLoading ? skeletons : pizzas}</div>
