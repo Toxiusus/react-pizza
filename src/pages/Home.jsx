@@ -25,25 +25,14 @@ const Home = () => {
 
   React.useEffect(() => {
     setIsLoading(true);
-    fetch(
-      `https://664ca05b35bbda1098812f41.mockapi.io/items?${category}&sortBy=${sortType}`,
-    )
+    axios
+      .get(`https://664ca05b35bbda1098812f41.mockapi.io/items?${category}&sortBy=${sortType}`)
       .then((res) => {
-        return res.json();
-      })
-      .then((arr) => {
-        setItems(arr);
+        setItems(res.data);
         setIsLoading(false);
       });
     window.scrollTo(0, 0);
   }, [categoryId, sortType]);
-
-  // axios
-  //   .get(`https://664ca05b35bbda1098812f41.mockapi.io/items?${category}&sortBy=${sortType}`)
-  //   .then((res) => {
-  //     setItems(res.data);
-  //     setIsLoading(false);
-  //   });
 
   const pizzas = items
     .filter((obj) => {

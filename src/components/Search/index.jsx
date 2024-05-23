@@ -1,5 +1,6 @@
 import React from 'react';
 
+import debounce from 'lodash.debounce';
 import styles from './Search.module.scss';
 import search from '../../assets/img/search.svg';
 import close from '../../assets/img/close.svg';
@@ -10,9 +11,21 @@ const Search = () => {
 
   const inputRef = React.useRef();
 
+  const testDebounce = React.useCallback(
+    debounce(() => {
+      console.log('hello');
+    }, 1000),
+    [],
+  );
+
   const onClickClear = () => {
     setSearchValue('');
     inputRef.current.focus();
+  };
+
+  const onChangeInput = (event) => {
+    setSearchValue(event.target.value);
+    testDebounce();
   };
 
   return (
@@ -21,7 +34,7 @@ const Search = () => {
       <input
         ref={inputRef}
         value={searchValue}
-        onChange={(event) => setSearchValue(event.target.value)}
+        onChange={onChangeInput}
         className={styles.input}
         type="text"
         placeholder="Поиск пиццы..."
