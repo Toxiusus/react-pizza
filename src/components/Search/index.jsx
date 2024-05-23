@@ -7,25 +7,27 @@ import close from '../../assets/img/close.svg';
 import { SearchContext } from '../../App';
 
 const Search = () => {
-  const { searchValue, setSearchValue } = React.useContext(SearchContext);
+  const [value, setValue] = React.useState('');
+  const { setSearchValue } = React.useContext(SearchContext);
 
   const inputRef = React.useRef();
 
-  const testDebounce = React.useCallback(
-    debounce(() => {
-      console.log('hello');
-    }, 1000),
-    [],
-  );
-
   const onClickClear = () => {
     setSearchValue('');
+    setValue('')
     inputRef.current.focus();
   };
 
+  const updateSearchValue = React.useCallback(
+    debounce((str) => {
+      setSearchValue(str);
+    }, 350),
+    [],
+  );
+
   const onChangeInput = (event) => {
-    setSearchValue(event.target.value);
-    testDebounce();
+    setValue(event.target.value);
+    updateSearchValue(event.target.value);
   };
 
   return (
@@ -33,15 +35,13 @@ const Search = () => {
       <img className={styles.icon} src={search} alt="search" />
       <input
         ref={inputRef}
-        value={searchValue}
+        value={value}
         onChange={onChangeInput}
         className={styles.input}
         type="text"
         placeholder="Поиск пиццы..."
       />
-      {searchValue && (
-        <img onClick={onClickClear} className={styles.close} src={close} alt="close" />
-      )}
+      {value && <img onClick={onClickClear} className={styles.close} src={close} alt="close" />}
     </div>
   );
 };
