@@ -1,9 +1,24 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
-const PizzaBlock = ({ title, price, sizes, types, imageUrl }) => {
+import { addItem } from '../../redux/slices/cartSlice';
+
+const PizzaBlock = ({ id, title, price, sizes, types, imageUrl }) => {
+  const dispatch = useDispatch();
   const typeNames = ['тонкое', 'традиционное'];
-  const [sizeIndex, setSizeIndex] = React.useState(0);
-  const [typeIndex, setTypeIndex] = React.useState(0);
+  const [activeType, setActiveType] = React.useState(0);
+  const [activeSize, setActiveSize] = React.useState(0);
+
+  const onClickAdd = () => {
+    const item = {
+      id,
+      title,
+      price,
+      imageUrl,
+      type: activeType,
+    };
+    dispatch(addItem(item))
+  };
 
   return (
     <div className="pizza-block">
@@ -12,14 +27,17 @@ const PizzaBlock = ({ title, price, sizes, types, imageUrl }) => {
       <div className="pizza-block__selector">
         <ul>
           {types.map((type, i) => (
-            <li key={i} onClick={() => setTypeIndex(i)} className={typeIndex === i ? 'active' : ''}>
+            <li
+              key={i}
+              onClick={() => setActiveType(i)}
+              className={activeType === i ? 'active' : ''}>
               {typeNames[type]}
             </li>
           ))}
         </ul>
         <ul>
           {sizes.map((size, i) => (
-            <li key={i} onClick={() => setSizeIndex(i)} className={sizeIndex === i ? 'active' : ''}>
+            <li key={i} onClick={() => setActiveSize(i)} className={activeSize === i ? 'active' : ''}>
               {size} см.
             </li>
           ))}
@@ -27,7 +45,7 @@ const PizzaBlock = ({ title, price, sizes, types, imageUrl }) => {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {price} ₽</div>
-        <button className="button button--outline button--add">
+        <button onClick={onClickAdd} className="button button--outline button--add">
           <svg
             width="12"
             height="12"
