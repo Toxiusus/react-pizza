@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { addItem, removeItem } from '../redux/slices/cartSlice';
+import { addItem, removeItem, minusItem } from '../redux/slices/cartSlice';
 
 const CartItem = ({ id, title, type, price, count, imageUrl }) => {
   const dispatch = useDispatch();
@@ -12,6 +12,9 @@ const CartItem = ({ id, title, type, price, count, imageUrl }) => {
     );
   };
   const onClickMinus = () => {
+    dispatch(minusItem(id));
+  };
+  const onClickRemove = () => {
     dispatch(removeItem(id));
   };
   return (
@@ -24,7 +27,9 @@ const CartItem = ({ id, title, type, price, count, imageUrl }) => {
         <p>{type}, 26 см.</p>
       </div>
       <div className="cart__item-count">
-        <button onClick={onClickMinus} className="button button--outline button--circle cart__item-count-minus">
+        <button
+          onClick={onClickMinus}
+          className="button button--outline button--circle cart__item-count-minus">
           <svg
             width="10"
             height="10"
@@ -42,7 +47,9 @@ const CartItem = ({ id, title, type, price, count, imageUrl }) => {
           </svg>
         </button>
         <b>{count}</b>
-        <button onClick={onClickPlus} className="button button--outline button--circle cart__item-count-plus">
+        <button
+          onClick={onClickPlus}
+          className="button button--outline button--circle cart__item-count-plus">
           <svg
             width="10"
             height="10"
@@ -64,7 +71,7 @@ const CartItem = ({ id, title, type, price, count, imageUrl }) => {
         <b>{price * count} ₽</b>
       </div>
       <div className="cart__item-remove">
-        <div className="button button--outline button--circle">
+        <button onClick={onClickRemove} className="button button--outline button--circle">
           <svg
             width="10"
             height="10"
@@ -80,7 +87,7 @@ const CartItem = ({ id, title, type, price, count, imageUrl }) => {
               fill="#EB5A1E"
             />
           </svg>
-        </div>
+        </button>
       </div>
     </div>
   );
